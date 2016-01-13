@@ -3,6 +3,7 @@ package com.springblog.domain;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @Entity
 public class User {
 
+    @Id
     private Long id;
 
     private String username;
@@ -24,5 +26,5 @@ public class User {
 
     private Boolean admin;
 
-    private LocalDateTime activation;
+    private LocalDateTime activationDate;
 }
