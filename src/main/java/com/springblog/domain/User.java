@@ -1,10 +1,12 @@
 package com.springblog.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.annotation.CheckForNull;
+import javax.persistence.*;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 /**
@@ -16,6 +18,7 @@ import java.time.LocalDateTime;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
@@ -26,5 +29,6 @@ public class User {
 
     private Boolean admin;
 
-    private LocalDateTime activationDate;
+    @Column(name = "ACTIVATION_DATE")
+    private Timestamp activationDate;
 }
