@@ -1,8 +1,6 @@
 package com.springblog.service;
 
-import com.google.common.collect.Lists;
-import com.springblog.domain.BlogPost;
-import org.springframework.stereotype.Service;
+import com.springblog.domain.entity.BlogPost;
 
 import java.util.List;
 

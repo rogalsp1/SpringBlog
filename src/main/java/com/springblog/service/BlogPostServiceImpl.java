@@ -1,7 +1,7 @@
 package com.springblog.service;
 
 import com.google.common.collect.Lists;
-import com.springblog.domain.BlogPost;
+import com.springblog.domain.entity.BlogPost;
 import com.springblog.repository.BlogPostRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

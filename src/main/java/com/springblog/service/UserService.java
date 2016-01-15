@@ -1,8 +1,6 @@
 package com.springblog.service;
 
-import com.springblog.domain.User;
-import com.springblog.domain.User;
-import org.springframework.stereotype.Service;
+import com.springblog.domain.entity.User;
 
 import java.util.List;
 

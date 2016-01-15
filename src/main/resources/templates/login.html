@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Spring Framework Guru</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link href="../static/css/style.css"
+          th:href="@{css/style.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+
+<div id="login-overlay" class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="well">
+                        <form id="loginForm"  th:action="@{/login}" th:object="${user}" method="post"  novalidate="novalidate">
+                            <div class="form-group">
+                                <label for="username" class="control-label">Nazwa użytkownika</label>
+                                <input type="text" class="form-control" th:field="*{username}" id="username" name="username" required="true"
+                                       title="Podaj nazwę uzytkownika" placeholder="example@gmail.com"/>
+                                <span class="help-block"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="control-label">Hasło</label>
+                                <input type="password" class="form-control" th:field="*{password}" id="password" name="password"
+                                       required="true" title="Podaj hasło"/>
+                                <span class="help-block"></span>
+                            </div>
+                            <div id="loginErrorMsg" class="alert alert-error hide">Niepoprawna nazwa uzytkonika lub hasło
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="remember" id="remember"/> Zapisz hasło
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-block">Zaloguj</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <p class="lead">Register now for <span class="text-success">FREE</span></p>
+                    <ul class="list-unstyled" style="line-height: 2">
+                        <li><span class="fa fa-check text-success"></span> See all your orders</li>
+                        <li><span class="fa fa-check text-success"></span> Fast re-order</li>
+                        <li><span class="fa fa-check text-success"></span> Save your favorites</li>
+                        <li><span class="fa fa-check text-success"></span> Fast checkout</li>
+                        <li><span class="fa fa-check text-success"></span> Get a gift <small>(only new customers)</small></li>
+                        <li><a href="/read-more/"><u>Read more</u></a></li>
+                    </ul>
+                    <p><a href="/new-customer/" class="btn btn-info btn-block">Yes please, register now!</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

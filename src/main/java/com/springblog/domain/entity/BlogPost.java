@@ -1,4 +1,4 @@
-package com.springblog.domain;
+package com.springblog.domain.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

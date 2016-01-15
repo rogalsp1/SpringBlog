@@ -1,6 +1,6 @@
 package com.springblog.service;
 
-import com.springblog.domain.User;
+import com.springblog.domain.entity.User;
 import com.springblog.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
