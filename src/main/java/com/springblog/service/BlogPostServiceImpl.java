@@ -18,35 +18,29 @@ public class BlogPostServiceImpl implements BlogPostService {
 
     private static final Logger logger = LoggerFactory.getLogger(BlogPostServiceImpl.class);
 
-    private BlogPostRepository blogPostRepository;
+    private final BlogPostRepository blogPostRepository;
 
     @Autowired
     public BlogPostServiceImpl(BlogPostRepository blogPostRepository) {
         this.blogPostRepository = blogPostRepository;
     }
 
-    @Override
     public BlogPost save(BlogPost blogPost) {
         return blogPostRepository.save(blogPost);
     }
 
-
-    @Override
     public BlogPost findOne(Long id) {
         return blogPostRepository.findOne(id) ;
     }
 
-    @Override
     public List<BlogPost> findAll() {
         return Lists.newArrayList(blogPostRepository.findAll());
     }
 
-    @Override
     public Long count() {
         return blogPostRepository.count();
     }
 
-    @Override
     public void delete(BlogPost blogPost) {
         blogPostRepository.delete(blogPost);
     }
