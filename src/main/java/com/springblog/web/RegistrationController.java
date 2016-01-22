@@ -39,6 +39,7 @@ public class RegistrationController {
     public void initBinder(WebDataBinder webDataBinder){
         webDataBinder.addValidators();
     }
+
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView getRegistrationPage(){
         return new ModelAndView("registration", "form", new NewUserForm());

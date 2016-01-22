@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  * Created by rogalsp1 on 15.01.2016.
  */
 @Repository
-public class BlogPostRepositoryImpl implements BlogPostRepositoryCustom {
+public class BlogPostRepositoryImpl {
 
     private static final Logger logger = LoggerFactory.getLogger(BlogPostRepositoryImpl.class);
 }

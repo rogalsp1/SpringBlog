@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public class UserRepositoryImpl implements UserRepositoryCustom {
+public class UserRepositoryImpl {
 
     private static final Logger logger = LoggerFactory.getLogger(UserRepositoryImpl.class);
 }

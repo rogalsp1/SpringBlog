@@ -65,8 +65,6 @@
     <div class="container well">
 
         <div class="row">
-
-            <!-- Blog Entries Column -->
             <div class="col-md-8">
                 <h1 class="page-header">
                     <img class="logo" th:src="@{images/photo.jpg.png}" src="https://yt3.ggpht.com/-zF4TRgEyKkg/AAAAAAAAAAI/AAAAAAAAAAA/IBt_QgQUASE/s900-c-k-no/photo.jpg" alt=""/>
@@ -74,22 +72,24 @@
                     <small>Blog o Spring Framework</small>
                 </h1>
 
-                <!-- First Blog Post -->
-                <h2>
-                    <a href="#">Blog Post Title</a>
-                </h2>
-                <p class="lead">
-                    by <a href="index.php">Start Bootstrap</a>
-                </p>
-                <p><span class="glyphicon glyphicon-time"></span> Dodano:</p>
-                <hr/>
-                <img class="img-responsive" src="http://placehold.it/900x300" alt=""/>
-                <hr/>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora, necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi corrupti debitis ipsum officiis rerum.</p>
-                <a class="btn btn-primary" href="#">Czytaj... <span class="glyphicon glyphicon-chevron-right"></span></a>
-
-                <hr/>
-                <!-- Pager -->
+                <!-- Blog Post -->
+                <div th:each="post : ${postList}">
+                    <h2>
+                        <a href="#" th:text="${post.title}">Blog Post Title</a>
+                    </h2>
+                    <p class="lead">
+                        by <a href="index.php" th:text="${post.author.username}">Start Bootstrap</a>
+                    </p>
+                    <p><span class="glyphicon glyphicon-time"></span>Dodano: <span
+                            th:text="${#dates.format(post.whenPostCreated)}"></span> </p>
+                    <hr/>
+                    <img class="img-responsive" src="http://placehold.it/900x300" alt=""/>
+                    <hr/>
+                    <p th:utext="${post.post}"></p>
+                    <a class="btn btn-primary" href="#">Czytaj... <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <hr/>
+                </div>
+               <!-- &lt;!&ndash; Pager &ndash;&gt;
                 <ul class="pager">
                     <li class="previous">
                         <a href="#">&larr; Starsze</a>
@@ -97,7 +97,7 @@
                     <li class="next">
                         <a href="#">Nowsze &rarr;</a>
                     </li>
-                </ul>
+                </ul>-->
 
             </div>
 
@@ -169,7 +169,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p>Copyright &copy; Spring Blog 2015</p>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

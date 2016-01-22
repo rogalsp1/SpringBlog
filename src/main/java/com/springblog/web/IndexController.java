@@ -1,5 +1,6 @@
 package com.springblog.web;
 
+import com.springblog.domain.entity.BlogPost;
 import com.springblog.domain.entity.User;
 import com.springblog.domain.enums.Role;
 import com.springblog.service.BlogPostService;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -33,9 +36,10 @@ public class IndexController {
         this.userService = userService;
     }
 
-    @RequestMapping("/")
-    public String index(){
-        return "index";
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView index(){
+        List<BlogPost> postList = blogPostService.findAll();
+        return new ModelAndView("index","postList",postList);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

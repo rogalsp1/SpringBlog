@@ -57,6 +57,7 @@ public class UserServiceImpl implements UserService {
         user.setEmail(form.getEmail());
         user.setPassword(new BCryptPasswordEncoder().encode(form.getPassword()));
         user.setRole(form.getRole());
+        logger.info("Registered new user=[" + user.getUsername() +"]");
         return userRepository.save(user);
     }
 

@@ -33,6 +33,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                     .antMatchers("/js/**").permitAll()
                     .antMatchers("/images/**").permitAll()
                     .antMatchers("/registration").permitAll()
+                    .antMatchers("/newPost").permitAll()
+                    .antMatchers("/uploadFile").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
@@ -47,7 +49,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                     .and()
                 .headers()
                     .frameOptions().sameOrigin()
-                    .httpStrictTransportSecurity().disable();
+                    .httpStrictTransportSecurity().disable()
+                    .and()
+                .csrf().disable();
     }
 
     @Autowired
