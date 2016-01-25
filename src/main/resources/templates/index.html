@@ -83,7 +83,8 @@
                     <p><span class="glyphicon glyphicon-time"></span>Dodano: <span
                             th:text="${#dates.format(post.whenPostCreated)}"></span> </p>
                     <hr/>
-                    <img class="img-responsive" src="http://placehold.it/900x300" alt=""/>
+                    <p th:text="${post.id}"></p>
+                    <img class="img-responsive" th:src="@{'/image/' + ${post.id}}"  alt=""/>
                     <hr/>
                     <p th:utext="${post.post}"></p>
                     <a class="btn btn-primary" href="#">Czytaj... <span class="glyphicon glyphicon-chevron-right"></span></a>

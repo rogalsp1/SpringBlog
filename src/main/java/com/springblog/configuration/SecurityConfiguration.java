@@ -31,6 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                     .antMatchers("/webjars/**").permitAll()
                     .antMatchers("/css/**").permitAll()
                     .antMatchers("/js/**").permitAll()
+                    .antMatchers("/image/**").permitAll()
                     .antMatchers("/images/**").permitAll()
                     .antMatchers("/registration").permitAll()
                     .antMatchers("/newPost").permitAll()
@@ -56,8 +57,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
     @Autowired
     public void configure(AuthenticationManagerBuilder auth) throws Exception{
-        auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(new BCryptPasswordEncoder());
+        auth.inMemoryAuthentication().withUser("asdsadasd").password("sAsaSA").roles("ADMIN");
+               /* .userDetailsService(userDetailsService)
+                .passwordEncoder(new BCryptPasswordEncoder());*/
     }
 }
