@@ -40,4 +40,8 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "USER_ID")
     private List<BlogPost> postList;
+
+    @OneToMany(fetch =  FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "USER_ID")
+    private List<Comment> commentList;
 }

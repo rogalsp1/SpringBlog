@@ -6,6 +6,7 @@ import com.springblog.web.form.NewUserForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +46,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public void delete(User user) {
+        userRepository.delete(user);
     }
 
     public Optional<User> findUserByUsername(String username) {
@@ -54,11 +56,15 @@ public class UserServiceImpl implements UserService {
     public User create(NewUserForm form) {
         User user = new User();
         user.setUsername(form.getUsername());
-        user.setEmail(form.getEmail());
         user.setPassword(new BCryptPasswordEncoder().encode(form.getPassword()));
         user.setRole(form.getRole());
         logger.info("Registered new user=[" + user.getUsername() +"]");
         return userRepository.save(user);
+    }
+
+    public User getLoggedUser(){
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findUserByUsername(username).orElse(userRepository.findOne(1l));
     }
 
 

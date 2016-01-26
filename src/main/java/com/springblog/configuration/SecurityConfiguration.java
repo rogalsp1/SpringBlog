@@ -27,15 +27,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeRequests()
-                    .antMatchers("/").permitAll()
                     .antMatchers("/webjars/**").permitAll()
                     .antMatchers("/css/**").permitAll()
                     .antMatchers("/js/**").permitAll()
-                    .antMatchers("/image/**").permitAll()
                     .antMatchers("/images/**").permitAll()
                     .antMatchers("/registration").permitAll()
-                    .antMatchers("/newPost").permitAll()
-                    .antMatchers("/uploadFile").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
@@ -57,8 +53,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
     @Autowired
     public void configure(AuthenticationManagerBuilder auth) throws Exception{
-        auth.inMemoryAuthentication().withUser("asdsadasd").password("sAsaSA").roles("ADMIN");
-               /* .userDetailsService(userDetailsService)
-                .passwordEncoder(new BCryptPasswordEncoder());*/
+        auth
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(new BCryptPasswordEncoder())
+                .and()
+                .inMemoryAuthentication().withUser("user").password("user").roles("ADMIN");
     }
 }

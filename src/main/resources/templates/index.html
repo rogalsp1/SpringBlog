@@ -9,7 +9,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>Blog Home - Start Bootstrap Template</title>
+    <title>Spring Blog</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
@@ -46,13 +46,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
+                        <a th:href="@{/newPost}">Dodaj nowy post</a>
                     </li>
                     <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
+                        <a th:href="@{/logout}">Wyloguj</a>
                     </li>
                 </ul>
             </div>
@@ -65,7 +62,7 @@
     <div class="container well">
 
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-sm-12">
                 <h1 class="page-header">
                     <img class="logo" th:src="@{images/photo.jpg.png}" src="https://yt3.ggpht.com/-zF4TRgEyKkg/AAAAAAAAAAI/AAAAAAAAAAA/IBt_QgQUASE/s900-c-k-no/photo.jpg" alt=""/>
                     Spring Blog
@@ -73,9 +70,9 @@
                 </h1>
 
                 <!-- Blog Post -->
-                <div th:each="post : ${postList}">
+                <div th:each="post : ${postList}" class="well">
                     <h2>
-                        <a href="#" th:text="${post.title}">Blog Post Title</a>
+                        <a th:href="@{'/post/' + ${post.id}}" th:text="${post.title}">Blog Post Title</a>
                     </h2>
                     <p class="lead">
                         by <a href="index.php" th:text="${post.author.username}">Start Bootstrap</a>
@@ -83,12 +80,10 @@
                     <p><span class="glyphicon glyphicon-time"></span>Dodano: <span
                             th:text="${#dates.format(post.whenPostCreated)}"></span> </p>
                     <hr/>
-                    <p th:text="${post.id}"></p>
                     <img class="img-responsive" th:src="@{'/image/' + ${post.id}}"  alt=""/>
                     <hr/>
-                    <p th:utext="${post.post}"></p>
-                    <a class="btn btn-primary" href="#">Czytaj... <span class="glyphicon glyphicon-chevron-right"></span></a>
-                    <hr/>
+                    <p th:utext="${#strings.abbreviate(post.post,50)}"></p>
+                    <a class="btn btn-primary" th:href="@{'/post/' + ${post.id}}" >Czytaj... <span class="glyphicon glyphicon-chevron-right"></span></a>
                 </div>
                <!-- &lt;!&ndash; Pager &ndash;&gt;
                 <ul class="pager">
@@ -99,65 +94,6 @@
                         <a href="#">Nowsze &rarr;</a>
                     </li>
                 </ul>-->
-
-            </div>
-
-            <!-- Blog Sidebar Widgets Column -->
-            <div class="col-md-4">
-
-                <!-- Blog Search Well -->
-                <div class="well">
-                    <h4>Wyszukiwarka</h4>
-                    <div class="input-group">
-                        <input type="text" class="form-control"/>
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                                <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                        </span>
-                    </div>
-                    <!-- /.input-group -->
-                </div>
-
-                <!-- Blog Categories Well -->
-                <div class="well">
-                    <h4>Blog Categories</h4>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- /.col-lg-6 -->
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- /.col-lg-6 -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-
-                <!-- Side Widget Well -->
-                <div class="well">
-                    <h4>Side Widget Well</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
-                </div>
 
             </div>
 

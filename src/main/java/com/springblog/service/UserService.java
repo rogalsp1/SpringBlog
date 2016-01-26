@@ -25,4 +25,6 @@ public interface UserService{
     Optional<User> findUserByUsername(String username);
 
     User create(NewUserForm form);
+
+    User getLoggedUser();
 }

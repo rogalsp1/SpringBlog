@@ -31,7 +31,7 @@ public class ImageController {
 
     @RequestMapping(value = "/image/{postId}", method = RequestMethod.GET)
     public ResponseEntity<byte[]> getImageForPost(@PathVariable final String postId){
-        logger.info("getImageForPost postId: " + postId);
+        logger.info("Getting image for post [postId= " + postId + "]");
         byte[] image = postPictureService.getPictureForPost(Long.parseLong(postId)).getImage();
         final HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);

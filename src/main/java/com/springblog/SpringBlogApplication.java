@@ -15,6 +15,5 @@ public class SpringBlogApplication {
 	public static void main(String[] args) {
 		logger.info("Starting Spring Blog");
 		SpringApplication.run(SpringBlogApplication.class, args);
-
 	}
 }

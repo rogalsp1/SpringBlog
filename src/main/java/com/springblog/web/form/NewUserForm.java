@@ -19,9 +19,6 @@ public class NewUserForm {
     private String username;
 
     @NotEmpty
-    private String email;
-
-    @NotEmpty
     private String password;
 
     @NotEmpty

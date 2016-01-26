@@ -1,6 +1,8 @@
 package com.springblog.service;
 
 import com.springblog.domain.entity.BlogPost;
+import com.springblog.domain.entity.Comment;
+import com.springblog.web.form.NewCommentForm;
 import com.springblog.web.form.NewPostForm;
 
 import java.util.List;
@@ -22,4 +24,5 @@ public interface BlogPostService{
 
     BlogPost create(NewPostForm newPostForm);
 
+    BlogPost addComment(NewCommentForm newCommentForm, Long postId);
 }

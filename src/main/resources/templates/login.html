@@ -32,7 +32,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="password" class="control-label">Hasło</label>
-                                <input type="password" class="form-control" id="password" name="password"
+                                <input type="password" autocomplete="off" th:autocomplete="false" class="form-control" id="password" name="password"
                                        required="true" title="Podaj hasło"/>
                                 <span class="help-block"></span>
                             </div>
@@ -48,16 +48,12 @@
                     </div>
                 </div>
                 <div class="col-xs-6">
-                    <p class="lead">Register now for <span class="text-success">FREE</span></p>
+                    <p class="lead">Zarejestruj się by : </p>
                     <ul class="list-unstyled" style="line-height: 2">
-                        <li><span class="fa fa-check text-success"></span> See all your orders</li>
-                        <li><span class="fa fa-check text-success"></span> Fast re-order</li>
-                        <li><span class="fa fa-check text-success"></span> Save your favorites</li>
-                        <li><span class="fa fa-check text-success"></span> Fast checkout</li>
-                        <li><span class="fa fa-check text-success"></span> Get a gift <small>(only new customers)</small></li>
-                        <li><a href="/read-more/"><u>Read more</u></a></li>
+                        <li><span class="fa fa-check text-success"></span> Dodawać nowe posty</li>
+                        <li><span class="fa fa-check text-success"></span> Komentować posty</li>
                     </ul>
-                    <p><a href="/new-customer/" class="btn btn-info btn-block">Yes please, register now!</a></p>
+                    <p><a th:href="@{/registration}" class="btn btn-info btn-block">Rejestracja</a></p>
                 </div>
             </div>
         </div>

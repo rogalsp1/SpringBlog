@@ -2,15 +2,16 @@ package com.springblog.service;
 
 import com.google.common.collect.Lists;
 import com.springblog.domain.entity.BlogPost;
-import com.springblog.domain.entity.User;
+import com.springblog.domain.entity.Comment;
 import com.springblog.repository.BlogPostRepository;
+import com.springblog.repository.CommentRepository;
 import com.springblog.repository.UserRepository;
 import com.springblog.utils.DateUtils;
+import com.springblog.web.form.NewCommentForm;
 import com.springblog.web.form.NewPostForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,12 +26,14 @@ public class BlogPostServiceImpl implements BlogPostService {
     private static final Logger logger = LoggerFactory.getLogger(BlogPostServiceImpl.class);
 
     private final BlogPostRepository blogPostRepository;
-    private final UserRepository userRepository;
+    private final UserService userService;
+    private final CommentRepository commentRepository;
 
     @Autowired
-    public BlogPostServiceImpl(BlogPostRepository blogPostRepository, UserRepository userRepository) {
+    public BlogPostServiceImpl(BlogPostRepository blogPostRepository, UserRepository userRepository, UserService userService, CommentRepository commentRepository) {
         this.blogPostRepository = blogPostRepository;
-        this.userRepository = userRepository;
+        this.userService = userService;
+        this.commentRepository = commentRepository;
     }
 
     public BlogPost save(BlogPost blogPost) {
@@ -58,9 +61,19 @@ public class BlogPostServiceImpl implements BlogPostService {
         return blogPostRepository.save(newBlogPost);
     }
 
-    private User getLoggedUser(){
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return userRepository.findUserByUsername(username).orElse(userRepository.findOne(1l));
+    private void setPostPicture(BlogPost blogPost, NewPostForm form){
+        if(Objects.nonNull(form.getPostPicture())) {
+            form.getPostPicture().setBlogPost(blogPost);
+            blogPost.setPostPicture(form.getPostPicture());
+            logger.info("Setting picture=[" + form.getPostPicture().getFilename() + "]");
+        }
+    }
+
+    public BlogPost addComment(NewCommentForm commentForm, Long postId){
+        BlogPost post = blogPostRepository.findOne(postId);
+        Comment newComment = from(commentForm,post);
+        post.getCommentList().add(newComment);
+        return blogPostRepository.save(post);
     }
 
     private BlogPost from(NewPostForm postForm){
@@ -68,17 +81,18 @@ public class BlogPostServiceImpl implements BlogPostService {
         newBlogPost.setTitle(postForm.getTitle());
         newBlogPost.setPost(postForm.getPost());
         newBlogPost.setWhenPostCreated(DateUtils.now());
-        newBlogPost.setAuthor(getLoggedUser());
+        newBlogPost.setAuthor(userService.getLoggedUser());
         setPostPicture(newBlogPost,postForm);
         return newBlogPost;
     }
 
-    private void setPostPicture(BlogPost blogPost, NewPostForm form){
-        if(Objects.nonNull(form.getPostPicture())) {
-            form.getPostPicture().setBlogPost(blogPost);
-            blogPost.setPostPicture(form.getPostPicture());
-            logger.info("Setting picture=[" + form.getPostPicture().getFilename() + "]");
-        }
+    private Comment from(NewCommentForm form, BlogPost post){
+        Comment newComment = new Comment();
+        newComment.setComment(form.getComment());
+        newComment.setAuthor(userService.getLoggedUser());
+        newComment.setWhenCommentCreated(DateUtils.now());
+        newComment.setBlogPost(post);
+        return newComment;
     }
 }
 

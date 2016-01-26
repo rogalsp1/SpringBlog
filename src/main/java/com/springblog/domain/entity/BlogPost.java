@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import javax.annotation.Nullable;
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * Created by rogalsp1 on 13.01.2016.
@@ -35,5 +36,8 @@ public class BlogPost {
     @OneToOne(mappedBy = "blogPost", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private PostPicture postPicture;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "POST_ID")
+    private List<Comment> commentList;
 
 }
